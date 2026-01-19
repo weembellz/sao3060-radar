@@ -1,43 +1,96 @@
 <!DOCTYPE html>
-<html>
-<head><title>SAO3060 RADAR | Tarrrega Node API</title>
-<meta name="description" content="Datos licitaciones BOE/DOGC Tarrrega Urgell 1.42M EUR procesados">
-<meta name="keywords" content="licitaciones Tarrrega, BOE API, contratos publicos Lleida">
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAO3060 RADAR | Licitaciones Públicas en Tàrrega y Lleida en Tiempo Real</title>
+    <meta name="description" content="Sistema autónomo de monitoreo de licitaciones públicas BOE/DOGC en Tàrrega, Lleida y Cataluña. Datos estructurados, API gratuita y análisis de contratación.">
+    <meta name="keywords" content="licitaciones tarrrega, licitaciones lleida, contratos públicos cataluña, licitaciones boe dogc, api licitaciones">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      "name": "Radar de Licitaciones Públicas Tàrrega/Lleida",
+      "description": "Datos en tiempo real sobre contratos y concursos públicos en la zona de Urgell y Lleida extraídos de fuentes oficiales.",
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "creator": { "@type": "Organization", "name": "SAO3060 RADAR ACTIVE" },
+      "distribution": [
+        { "@type": "DataDownload", "encodingFormat": "JSON", "contentUrl": "https://weembellz.github.io/sao3060-radar/v1/status.json" }
+      ]
+    }
+    </script>
+
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Courier New',monospace;background:#050505;color:#00ff41;padding:20px;line-height:1.5}
+        .container{max-width:1000px;margin:0 auto}
+        .header-main{border-bottom:1px solid #00ff41;margin-bottom:30px;padding-bottom:10px}
+        .metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:20px 0}
+        .card-seo{border:1px solid #333;padding:20px;background:#111}
+        .card-seo h2{font-size:0.9em;color:#888;margin-bottom:10px;text-transform:uppercase}
+        .val{font-size:2.5em;font-weight:bold}
+        .api-doc{background:#111;padding:20px;border-left:4px solid #00ff41;margin:20px 0}
+        .content-block{margin-top:40px;color:#ccc;font-family:sans-serif;font-size:0.9em}
+        h1,h2,h3{color:#00ff41;margin-bottom:15px}
+    </style>
 </head>
-<body style="font-family:monospace;background:#000;color:#0f0;padding:40px;max-width:900px;margin:0 auto">
-<h1 style="font-size:3em">SAO3060 RADAR v1.0</h1>
-<p style="font-size:1.2em">Nodo Tarrrega | 1,420,004 EUR licitaciones activas | 19/01/2026</p>
+<body>
+    <div class="container">
+        <header class="header-main">
+            <h1>Licitaciones Públicas en Tàrrega en Tiempo Real</h1>
+            <p>Nodo: SAO3060-ESP-01 | Tàrrega, Lleida | Sistema de Inteligencia de Datos</p>
+        </header>
 
-<h2>API Pública Gratuita (100 req/min)</h2>
-<pre style="background:#111;padding:20px;border-radius:8px">
-GET /v1/status     → Estado nodo JSON
-GET /v1/tarrrega   → Licitaciones Urgell (4 contratos)
-GET /v1/top50      → Top 50 por valor EUR  
-GET /v1/lleida     → Provincia Lleida (8 contratos)
-GET /v1/active.csv → Export completo CSV
-</pre>
+        <section class="metrics-grid">
+            <div class="card-seo">
+                <h2>Valor Detectado</h2>
+                <div class="val" id="total_eur">--M €</div>
+            </div>
+            <div class="card-seo">
+                <h2>Contratos Activos</h2>
+                <div class="val" id="db_count">--</div>
+            </div>
+            <div class="card-seo">
+                <h2>Sincronización</h2>
+                <div class="val" id="sync_status" style="font-size:1.2em">PROCESANDO...</div>
+            </div>
+        </section>
 
-<div id="live" style="background:#111;padding:20px;border-radius:8px;font-size:1.5em;margin:20px 0"></div>
+        <section>
+            <h2>Monitor de Contratos BOE/DOGC en Lleida</h2>
+            <div class="api-doc">
+                <h3>Acceso a Datos Estructurados (API)</h3>
+                <p>Endpoints técnicos para consulta de licitaciones en Urgell y Cataluña:</p>
+                <ul>
+                    <li><code>/v1/status.json</code> - Metadatos del nodo</li>
+                    <li><code>/v1/tarrrega.json</code> - Dataset específico Tàrrega</li>
+                </ul>
+            </div>
+        </section>
 
-<script>
-fetch('v1/status.json?' + Date.now()).then(r=>r.json()).then(d=>{
-document.getElementById('live').innerHTML = 
-€M total |  registros |  CSVs listos
-Actualizado: 
+        <article class="content-block">
+            <h3>Sobre el Radar de Contratación Pública SAO3060</h3>
+            <p>Este nodo monitoriza de forma autónoma las licitaciones públicas, concursos y contratos menores en la zona de <strong>Tàrrega</strong> y la provincia de <strong>Lleida</strong>. Mediante el procesamiento de fuentes oficiales como el BOE y el DOGC, el radar genera datasets actualizados para el análisis de la transparencia fiscal y el mercado de suministros y obras en Cataluña.</p>
+        </article>
 
-})
-setInterval(()=>location.reload(), 30000)
-</script>
+        <footer style="margin-top:50px;font-size:0.8em;color:#444;border-top:1px solid #222;padding-top:20px">
+            Fuente de datos: Plataforma de Contratación del Sector Público | Actualización automática cada 24h
+        </footer>
+    </div>
 
-<h2>Ganancias Indirectas Pasivas</h2>
-<ul style="background:#111;padding:20px;border-radius:8px">
-<li>AdSense: <a href="https://amazon.es?tag=sao3060-21" style="color:#0f0">Hosting VPS</a></li>
-<li>Afiliados: <a href="https://binance.com?ref=sao3060" style="color:#0f0">Trading licitaciones</a></li>
-<li>Dominios: <a href="https://namecheap.com?ref=sao3060" style="color:#0f0">Datos públicos</a></li>
-</ul>
-
-<p style="font-size:0.9em;color:#888;margin-top:40px">
-Datos públicos BOE.es | Procesamiento independiente | Uso educativo/comercial
-</p>
+    <script>
+        async function fetchUpdate() {
+            try {
+                const r = await fetch('v1/status.json?' + Date.now());
+                const d = await r.json();
+                document.getElementById('total_eur').innerText = '€' + d.total_eur + 'M';
+                document.getElementById('db_count').innerText = d.db_count;
+                document.getElementById('sync_status').innerText = 'OK: ' + d.timestamp;
+            } catch(e) { console.log("Error sync"); }
+        }
+        fetchUpdate();
+        setInterval(fetchUpdate, 60000);
+    </script>
 </body>
 </html>
