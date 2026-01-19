@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head><title>SAO3060 RADAR API | Tàrrega Node</title>
-<meta name="description" content="API gratuita licitaciones BOE/DOGC España €1.42M procesados">
+<head><title>SAO3060 RADAR | Tarrrega Node API</title>
+<meta name="description" content="Datos licitaciones BOE/DOGC Tarrrega Urgell 1.42M EUR procesados">
+<meta name="keywords" content="licitaciones Tarrrega, BOE API, contratos publicos Lleida">
 </head>
-<body style="font-family:monospace;background:#000;color:#0f0;padding:20px">
-<h1>SAO3060 RADAR API v1.0</h1>
-<p>Nodo Tàrrega | €1,420,004 licitaciones activas | 19/01/2026</p>
+<body style="font-family:monospace;background:#000;color:#0f0;padding:40px;max-width:900px;margin:0 auto">
+<h1 style="font-size:3em">SAO3060 RADAR v1.0</h1>
+<p style="font-size:1.2em">Nodo Tarrrega | 1,420,004 EUR licitaciones activas | 19/01/2026</p>
 
-<h2>Endpoints Públicos (Rate Limit: 100/min)</h2>
-<pre>
-/v1/status           → Estado nodo JSON
-/v1/tarrrega         → Licitaciones Urgell/Tàrrega
-/v1/top50            → Top 50 por valor €  
-/v1/lleida           → Provincia Lleida
-/v1/active.csv       → Todos activos CSV
-/v1/docs             → Documentación OpenAPI
+<h2>API Pública Gratuita (100 req/min)</h2>
+<pre style="background:#111;padding:20px;border-radius:8px">
+GET /v1/status     → Estado nodo JSON
+GET /v1/tarrrega   → Licitaciones Urgell (4 contratos)
+GET /v1/top50      → Top 50 por valor EUR  
+GET /v1/lleida     → Provincia Lleida (8 contratos)
+GET /v1/active.csv → Export completo CSV
 </pre>
 
-<h2>Datos en vivo:</h2>
-<div id="live"></div>
+<div id="live" style="background:#111;padding:20px;border-radius:8px;font-size:1.5em;margin:20px 0"></div>
 
 <script>
-fetch('/v1/status').then(r=>r.json()).then(d=>{
-document.getElementById('live').innerHTML=
-Total: €M | 
-Registros:  | 
-Productos:  CSVs
+fetch('v1/status.json?' + Date.now()).then(r=>r.json()).then(d=>{
+document.getElementById('live').innerHTML = 
+€M total |  registros |  CSVs listos
+Actualizado: 
 
 })
+setInterval(()=>location.reload(), 30000)
 </script>
 
-<h2>Afiliados (pasivos):</h2>
-<ul>
-<li><a href="https://amazon.es?tag=sao3060-21">Hosting VPS</a></li>
-<li><a href="https://binance.com?ref=sao3060">Trading BOE</a></li>
-<li><a href="https://namecheap.com?ref=sao3060">Dominios datos</a></li>
+<h2>Ganancias Indirectas Pasivas</h2>
+<ul style="background:#111;padding:20px;border-radius:8px">
+<li>AdSense: <a href="https://amazon.es?tag=sao3060-21" style="color:#0f0">Hosting VPS</a></li>
+<li>Afiliados: <a href="https://binance.com?ref=sao3060" style="color:#0f0">Trading licitaciones</a></li>
+<li>Dominios: <a href="https://namecheap.com?ref=sao3060" style="color:#0f0">Datos públicos</a></li>
 </ul>
+
+<p style="font-size:0.9em;color:#888;margin-top:40px">
+Datos públicos BOE.es | Procesamiento independiente | Uso educativo/comercial
+</p>
 </body>
 </html>
