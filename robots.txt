@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://weembellz.github.io/sao3060-radar/sitemap.xml
